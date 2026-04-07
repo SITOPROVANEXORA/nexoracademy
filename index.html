@@ -1,0 +1,1056 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nexora Academy S.r.l. – Per chi sceglie il futuro, ora.</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #1a2e4a;
+    --navy-deep: #0f1e30;
+    --blue-accent: #4a7fb5;
+    --blue-light: #6da0d4;
+    --cream: #f0ece4;
+    --cream-dark: #e4dfd5;
+    --text: #1a2e4a;
+    --text-light: #4a5568;
+    --white: #ffffff;
+    --gold: #c9a84c;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    background: rgba(240,236,228,0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(26,46,74,0.12);
+    padding: 0 2rem;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 72px;
+    transition: box-shadow .3s;
+  }
+  nav.scrolled { box-shadow: 0 4px 30px rgba(26,46,74,0.10); }
+
+  .nav-logo {
+    display: flex; align-items: center; gap: 10px;
+    text-decoration: none;
+  }
+  .nav-logo-mark {
+    width: 36px; height: 36px;
+    background: var(--navy);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+  }
+  .nav-logo-mark::after {
+    content: '';
+    width: 9px; height: 9px;
+    background: var(--blue-accent);
+    border-radius: 50%;
+    position: absolute; top: 5px; left: 50%; transform: translateX(-50%);
+  }
+  .nav-logo-mark span {
+    font-family: 'Cormorant Garamond', serif;
+    color: var(--white);
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-top: 6px;
+  }
+  .nav-brand {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: var(--navy);
+    letter-spacing: 0.02em;
+  }
+  .nav-brand small { font-weight: 300; font-size: 0.75rem; display: block; color: var(--text-light); letter-spacing: 0.08em; }
+
+  .nav-links {
+    display: flex; align-items: center; gap: 0.5rem;
+    list-style: none;
+  }
+  .nav-links a {
+    color: var(--navy);
+    text-decoration: none;
+    font-size: 0.92rem;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    transition: background .2s, color .2s;
+    letter-spacing: 0.02em;
+  }
+  .nav-links a:hover { background: var(--navy); color: var(--white); }
+
+  .nav-cta {
+    background: var(--navy) !important;
+    color: var(--white) !important;
+    border-radius: 6px !important;
+  }
+  .nav-cta:hover { background: var(--blue-accent) !important; }
+
+  /* hamburger */
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 8px; }
+  .hamburger span { width: 24px; height: 2px; background: var(--navy); transition: .3s; display: block; }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex; align-items: center; justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    padding: 120px 2rem 80px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 70% 60% at 50% 80%, rgba(74,127,181,0.10) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(26,46,74,0.07);
+    border: 1px solid rgba(26,46,74,0.15);
+    border-radius: 100px;
+    padding: 6px 18px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--navy);
+    margin-bottom: 2rem;
+    animation: fadeUp 0.6s ease both;
+  }
+  .hero-badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--blue-accent); }
+
+  .hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3.5rem, 8vw, 7rem);
+    font-weight: 300;
+    color: var(--navy);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    animation: fadeUp 0.7s ease 0.1s both;
+  }
+  .hero h1 strong { font-weight: 600; }
+  .hero h1 em { font-style: italic; color: var(--blue-accent); }
+
+  .hero-sub {
+    font-size: 1.15rem;
+    color: var(--text-light);
+    max-width: 560px;
+    line-height: 1.7;
+    margin: 1.5rem auto 2.5rem;
+    font-weight: 300;
+    animation: fadeUp 0.7s ease 0.2s both;
+  }
+
+  .hero-buttons {
+    display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;
+    animation: fadeUp 0.7s ease 0.3s both;
+  }
+
+  .btn-primary {
+    background: var(--navy);
+    color: var(--white);
+    border: none; border-radius: 8px;
+    padding: 14px 28px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background .25s, transform .2s, box-shadow .25s;
+    display: inline-flex; align-items: center; gap: 8px;
+    letter-spacing: 0.02em;
+  }
+  .btn-primary:hover { background: var(--blue-accent); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(74,127,181,0.30); }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--navy);
+    border: 1.5px solid var(--navy);
+    border-radius: 8px;
+    padding: 14px 28px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background .25s, color .25s, transform .2s;
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .btn-outline:hover { background: var(--navy); color: var(--white); transform: translateY(-2px); }
+
+  /* ── SECTION COMMONS ── */
+  section { padding: 90px 2rem; }
+  .container { max-width: 1100px; margin: 0 auto; }
+  .section-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--blue-accent);
+    margin-bottom: 0.75rem;
+  }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 400;
+    color: var(--navy);
+    line-height: 1.15;
+    margin-bottom: 1.2rem;
+  }
+  .section-desc {
+    color: var(--text-light);
+    font-size: 1rem;
+    line-height: 1.75;
+    max-width: 580px;
+  }
+
+  /* ── FORMAZIONE BUTTONS ── */
+  #formazione { background: var(--white); }
+  .form-buttons-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+  .form-card {
+    border: 1.5px solid rgba(26,46,74,0.12);
+    border-radius: 12px;
+    padding: 2rem;
+    cursor: pointer;
+    transition: border-color .25s, box-shadow .25s, transform .25s;
+    background: var(--cream);
+    display: flex; flex-direction: column; gap: 0.75rem;
+  }
+  .form-card:hover { border-color: var(--blue-accent); box-shadow: 0 8px 32px rgba(74,127,181,0.15); transform: translateY(-4px); }
+  .form-card-icon {
+    width: 44px; height: 44px; border-radius: 10px;
+    background: var(--navy);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.3rem;
+  }
+  .form-card h3 { font-size: 1.05rem; font-weight: 600; color: var(--navy); }
+  .form-card p { font-size: 0.88rem; color: var(--text-light); line-height: 1.6; }
+  .form-card-link {
+    display: inline-flex; align-items: center; gap: 6px;
+    color: var(--blue-accent);
+    font-size: 0.85rem;
+    font-weight: 500;
+    margin-top: auto;
+    cursor: pointer;
+    transition: gap .2s;
+  }
+  .form-card:hover .form-card-link { gap: 10px; }
+
+  /* ── AREE FORMATIVE ── */
+  #aree { background: var(--cream); }
+  .aree-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.25rem;
+    margin-top: 3rem;
+  }
+  .area-chip {
+    background: var(--white);
+    border: 1.5px solid rgba(26,46,74,0.10);
+    border-radius: 12px;
+    padding: 1.5rem;
+    transition: .25s;
+    cursor: pointer;
+  }
+  .area-chip:hover { background: var(--navy); color: var(--white); border-color: var(--navy); transform: translateY(-3px); box-shadow: 0 8px 24px rgba(26,46,74,0.18); }
+  .area-chip:hover .area-num { color: var(--blue-light); }
+  .area-chip:hover .area-name { color: var(--white); }
+  .area-num { font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 300; color: var(--cream-dark); transition: .25s; }
+  .area-name { font-weight: 500; font-size: 0.95rem; color: var(--navy); margin-top: 0.5rem; line-height: 1.4; transition: .25s; }
+
+  /* ── METODO ── */
+  #metodo {
+    background: var(--navy);
+    position: relative; overflow: hidden;
+  }
+  #metodo::before {
+    content: '';
+    position: absolute; top: -50%; right: -10%;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(74,127,181,0.20) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  #metodo .section-label { color: var(--blue-light); }
+  #metodo .section-title { color: var(--white); }
+  .metodo-content {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;
+    margin-top: 3rem;
+  }
+  .metodo-text {
+    font-size: 1.05rem;
+    color: rgba(255,255,255,0.80);
+    line-height: 1.85;
+    font-weight: 300;
+  }
+  .metodo-steps {
+    display: flex; flex-direction: column; gap: 1.25rem;
+  }
+  .metodo-step {
+    display: flex; gap: 1rem; align-items: flex-start;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.10);
+    border-radius: 10px;
+    padding: 1.25rem;
+  }
+  .step-num {
+    width: 32px; height: 32px; border-radius: 50%;
+    background: var(--blue-accent);
+    color: var(--white);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.8rem;
+    font-weight: 600;
+    flex-shrink: 0;
+  }
+  .step-text h4 { color: var(--white); font-size: 0.92rem; font-weight: 600; margin-bottom: 4px; }
+  .step-text p { color: rgba(255,255,255,0.65); font-size: 0.83rem; line-height: 1.5; }
+
+  .metodo-cta {
+    margin-top: 2.5rem;
+  }
+  .btn-white {
+    background: var(--white);
+    color: var(--navy);
+    border: none; border-radius: 8px;
+    padding: 16px 32px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: .25s;
+    display: inline-flex; align-items: center; gap: 8px;
+    text-decoration: none;
+  }
+  .btn-white:hover { background: var(--blue-accent); color: var(--white); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.25); }
+
+  /* ── VALORI ── */
+  #valori { background: var(--white); }
+  .valori-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem;
+    margin-top: 3rem;
+  }
+  .valore-card {
+    border-radius: 12px;
+    border: 1.5px solid rgba(26,46,74,0.10);
+    padding: 2rem 1.5rem;
+    text-align: center;
+    transition: .25s;
+    background: var(--cream);
+  }
+  .valore-card:hover { border-color: var(--blue-accent); box-shadow: 0 8px 32px rgba(74,127,181,0.12); transform: translateY(-4px); }
+  .valore-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3rem;
+    font-weight: 300;
+    color: var(--blue-accent);
+    opacity: 0.5;
+    line-height: 1;
+  }
+  .valore-title { font-size: 1.05rem; font-weight: 600; color: var(--navy); margin-top: 0.5rem; }
+  .valore-desc { font-size: 0.85rem; color: var(--text-light); margin-top: 0.5rem; line-height: 1.6; }
+
+  /* ── PERCORSI ── */
+  #percorsi { background: var(--cream); }
+  .percorsi-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1.25rem;
+    margin-top: 3rem;
+  }
+  .percorso-card {
+    background: var(--white);
+    border: 1.5px solid rgba(26,46,74,0.09);
+    border-radius: 12px;
+    padding: 1.75rem;
+    display: flex; flex-direction: column; gap: 0.75rem;
+    transition: .25s;
+  }
+  .percorso-card:hover { border-color: var(--blue-accent); box-shadow: 0 8px 28px rgba(74,127,181,0.14); transform: translateY(-3px); }
+  .percorso-icon { font-size: 1.7rem; }
+  .percorso-title { font-weight: 600; font-size: 0.95rem; color: var(--navy); line-height: 1.3; }
+  .btn-info {
+    margin-top: auto;
+    background: transparent;
+    border: 1.5px solid var(--navy);
+    color: var(--navy);
+    border-radius: 6px;
+    padding: 9px 16px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.83rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: .22s;
+    text-align: center;
+  }
+  .btn-info:hover { background: var(--navy); color: var(--white); }
+
+  /* ── FAQ ── */
+  #faq { background: var(--white); }
+  .faq-list { margin-top: 3rem; max-width: 800px; }
+  .faq-item {
+    border-bottom: 1px solid rgba(26,46,74,0.10);
+  }
+  .faq-q {
+    width: 100%;
+    background: none; border: none;
+    text-align: left;
+    padding: 1.25rem 0;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.98rem;
+    font-weight: 600;
+    color: var(--navy);
+    cursor: pointer;
+    display: flex; justify-content: space-between; align-items: center;
+    gap: 1rem;
+  }
+  .faq-q .faq-arrow {
+    width: 24px; height: 24px; border-radius: 50%;
+    background: var(--cream);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.9rem;
+    flex-shrink: 0;
+    transition: transform .3s, background .2s;
+  }
+  .faq-q.open .faq-arrow { transform: rotate(180deg); background: var(--navy); color: var(--white); }
+  .faq-a {
+    max-height: 0; overflow: hidden;
+    transition: max-height .4s ease, padding .3s;
+    font-size: 0.9rem;
+    color: var(--text-light);
+    line-height: 1.7;
+  }
+  .faq-a.open { max-height: 300px; padding-bottom: 1.25rem; }
+
+  /* ── FORM CONTATTO ── */
+  #contatti { background: var(--cream); }
+  .contatti-grid { display: grid; grid-template-columns: 1fr 1.3fr; gap: 4rem; margin-top: 3rem; align-items: flex-start; }
+  .contact-info { display: flex; flex-direction: column; gap: 2rem; }
+  .contact-block h4 { font-weight: 600; font-size: 0.9rem; color: var(--navy); letter-spacing: 0.05em; margin-bottom: 0.5rem; }
+  .contact-block p, .contact-block a {
+    color: var(--text-light); font-size: 0.9rem; line-height: 1.6;
+    text-decoration: none;
+    transition: color .2s;
+  }
+  .contact-block a:hover { color: var(--navy); }
+
+  .cta-call {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: var(--navy);
+    color: var(--white);
+    border: none; border-radius: 10px;
+    padding: 14px 24px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    transition: .25s;
+    width: fit-content;
+  }
+  .cta-call:hover { background: var(--blue-accent); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(74,127,181,0.3); }
+
+  .contact-form {
+    background: var(--white);
+    border: 1.5px solid rgba(26,46,74,0.10);
+    border-radius: 16px;
+    padding: 2.5rem;
+  }
+  .contact-form h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    font-weight: 400;
+    color: var(--navy);
+    margin-bottom: 1.5rem;
+  }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .form-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 1rem; }
+  .form-group label { font-size: 0.82rem; font-weight: 600; color: var(--navy); letter-spacing: 0.04em; }
+  .form-group input, .form-group select, .form-group textarea {
+    background: var(--cream);
+    border: 1.5px solid rgba(26,46,74,0.12);
+    border-radius: 8px;
+    padding: 11px 14px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    color: var(--navy);
+    outline: none;
+    transition: border-color .22s;
+  }
+  .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--blue-accent); }
+  .form-group textarea { resize: vertical; min-height: 100px; }
+  .form-group select { appearance: none; cursor: pointer; }
+  .btn-submit {
+    width: 100%;
+    background: var(--navy);
+    color: var(--white);
+    border: none; border-radius: 8px;
+    padding: 14px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: .25s;
+    letter-spacing: 0.03em;
+  }
+  .btn-submit:hover { background: var(--blue-accent); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(74,127,181,0.30); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--navy-deep);
+    color: rgba(255,255,255,0.6);
+    padding: 2.5rem 2rem;
+    text-align: center;
+    font-size: 0.85rem;
+  }
+  footer strong { color: var(--white); }
+
+  /* ── MODAL ── */
+  .modal-overlay {
+    position: fixed; inset: 0; z-index: 9999;
+    background: rgba(15,30,48,0.7);
+    backdrop-filter: blur(6px);
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0; pointer-events: none;
+    transition: opacity .3s;
+    padding: 1rem;
+  }
+  .modal-overlay.show { opacity: 1; pointer-events: all; }
+  .modal {
+    background: var(--white);
+    border-radius: 16px;
+    padding: 2.5rem;
+    max-width: 480px; width: 100%;
+    transform: translateY(20px);
+    transition: transform .3s;
+  }
+  .modal-overlay.show .modal { transform: translateY(0); }
+  .modal h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; color: var(--navy); margin-bottom: 1rem; }
+  .modal p { color: var(--text-light); font-size: 0.9rem; line-height: 1.7; margin-bottom: 1.5rem; }
+  .modal-close { float: right; background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--text-light); }
+
+  /* ── CHI SIAMO ── */
+  #chisiamo { background: var(--white); }
+  .chisiamo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; margin-top: 3rem; align-items: center; }
+  .chisiamo-visual {
+    background: var(--navy);
+    border-radius: 16px;
+    height: 360px;
+    display: flex; align-items: center; justify-content: center;
+    position: relative; overflow: hidden;
+  }
+  .chisiamo-visual::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(circle at 30% 60%, rgba(74,127,181,0.35) 0%, transparent 60%);
+  }
+  .chisiamo-visual-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 5rem;
+    font-weight: 300;
+    color: rgba(255,255,255,0.10);
+    position: absolute;
+    line-height: 1;
+  }
+  .chisiamo-dot {
+    width: 70px; height: 70px;
+    border-radius: 50%;
+    background: var(--blue-accent);
+    position: absolute;
+    top: 30%; left: 50%; transform: translate(-50%,-50%);
+    opacity: 0.8;
+  }
+  .chisiamo-content p { color: var(--text-light); line-height: 1.8; font-size: 0.97rem; margin-bottom: 1rem; }
+  .chisiamo-stat-row { display: flex; gap: 2rem; margin-top: 2rem; }
+  .stat { text-align: center; }
+  .stat-num { font-family: 'Cormorant Garamond', serif; font-size: 2.5rem; font-weight: 400; color: var(--navy); }
+  .stat-label { font-size: 0.78rem; color: var(--text-light); letter-spacing: 0.05em; text-transform: uppercase; }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    .valori-grid { grid-template-columns: repeat(2, 1fr); }
+    .metodo-content { grid-template-columns: 1fr; gap: 2rem; }
+    .chisiamo-grid { grid-template-columns: 1fr; }
+    .contatti-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+  }
+  @media (max-width: 640px) {
+    .nav-links { display: none; flex-direction: column; position: fixed; top: 72px; left: 0; right: 0; background: var(--cream); border-bottom: 1px solid rgba(26,46,74,0.1); padding: 1rem; gap: 0.25rem; }
+    .nav-links.open { display: flex; }
+    .hamburger { display: flex; }
+    .valori-grid { grid-template-columns: 1fr 1fr; }
+    .form-row { grid-template-columns: 1fr; }
+    .hero-buttons { flex-direction: column; align-items: center; }
+    .chisiamo-stat-row { flex-wrap: wrap; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#home" class="nav-logo">
+    <div class="nav-logo-mark"><span>N</span></div>
+    <div class="nav-brand">nexora <strong>academy</strong><small>S.r.l.</small></div>
+  </a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#chisiamo">Chi siamo</a></li>
+    <li><a href="#percorsi">Corsi</a></li>
+    <li><a href="#contatti" class="nav-cta">Contatti</a></li>
+  </ul>
+  <div class="hamburger" onclick="toggleMenu()" id="hamburger">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-badge">Formazione Strategica d'Impresa</div>
+  <h1>Per chi sceglie<br><em>il futuro,</em> <strong>ora.</strong></h1>
+  <p class="hero-sub">Nexora Academy trasforma la formazione in un processo strategico integrato, orientato a performance misurabili e crescita reale.</p>
+  <div class="hero-buttons">
+    <a href="#metodo" class="btn-primary">Scopri il nostro metodo →</a>
+    <a href="#contatti" class="btn-outline">Richiedi consulenza</a>
+  </div>
+</section>
+
+<!-- FORMAZIONE AZIENDALE / FINANZIATA / SVILUPPO -->
+<section id="formazione">
+  <div class="container">
+    <div class="section-label">I nostri servizi</div>
+    <h2 class="section-title">Soluzioni formative<br>su misura</h2>
+    <p class="section-desc">Dall'analisi dei fabbisogni alla valutazione dei risultati, ogni percorso è progettato per il tuo contesto organizzativo.</p>
+
+    <div class="form-buttons-grid">
+      <div class="form-card" onclick="openModal('aziendale')">
+        <div class="form-card-icon">🏢</div>
+        <h3>Formazione Aziendale</h3>
+        <p>Percorsi personalizzati costruiti sulle reali esigenze della tua organizzazione, con analisi dei fabbisogni e monitoraggio KPI.</p>
+        <span class="form-card-link">Scopri di più →</span>
+      </div>
+      <div class="form-card" onclick="openModal('finanziata')">
+        <div class="form-card-icon">💼</div>
+        <h3>Formazione Finanziata</h3>
+        <p>Accesso ai fondi interprofessionali e alle misure regionali e nazionali per ridurre il costo della formazione a zero o quasi.</p>
+        <span class="form-card-link">Scopri di più →</span>
+      </div>
+      <div class="form-card" onclick="openModal('competenze')">
+        <div class="form-card-icon">🚀</div>
+        <h3>Sviluppo Competenze</h3>
+        <p>Programmi continuativi per valorizzare il capitale umano, aumentare la retention e costruire team ad alte performance.</p>
+        <span class="form-card-link">Scopri di più →</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CHI SIAMO -->
+<section id="chisiamo">
+  <div class="container">
+    <div class="chisiamo-grid">
+      <div class="chisiamo-visual">
+        <span class="chisiamo-visual-text">NX</span>
+        <div class="chisiamo-dot"></div>
+      </div>
+      <div class="chisiamo-content">
+        <div class="section-label">Chi siamo</div>
+        <h2 class="section-title">Una realtà nata per chi vuole crescere davvero</h2>
+        <p>Nexora Academy è una società di formazione professionale con sede a Pescara, specializzata nel supporto alle imprese e alle persone che vogliono costruire competenze solide e risultati concreti.</p>
+        <p>Il nostro team è composto da formatori certificati, consulenti aziendali e professionisti del settore che portano esperienze reali in aula.</p>
+        <div class="chisiamo-stat-row">
+          <div class="stat"><div class="stat-num">500+</div><div class="stat-label">Professionisti formati</div></div>
+          <div class="stat"><div class="stat-num">80+</div><div class="stat-label">Aziende partner</div></div>
+          <div class="stat"><div class="stat-num">15+</div><div class="stat-label">Aree tematiche</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AREE FORMATIVE -->
+<section id="aree">
+  <div class="container">
+    <div class="section-label">Aree Formative</div>
+    <h2 class="section-title">I domini di eccellenza<br>di Nexora Academy</h2>
+    <p class="section-desc">Quattro grandi aree di specializzazione per coprire ogni esigenza di sviluppo organizzativo e personale.</p>
+
+    <div class="aree-grid">
+      <div class="area-chip" onclick="openModal('commerciale')">
+        <div class="area-num">01</div>
+        <div class="area-name">Area Commerciale e Marketing</div>
+      </div>
+      <div class="area-chip" onclick="openModal('digitale')">
+        <div class="area-num">02</div>
+        <div class="area-name">Competenze Tecniche e Digitali</div>
+      </div>
+      <div class="area-chip" onclick="openModal('certificazioni')">
+        <div class="area-num">03</div>
+        <div class="area-name">Certificazioni Informatiche e Linguistiche</div>
+      </div>
+      <div class="area-chip" onclick="openModal('leadership')">
+        <div class="area-num">04</div>
+        <div class="area-name">Leadership e Management</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- METODO -->
+<section id="metodo">
+  <div class="container">
+    <div class="section-label">Il nostro metodo</div>
+    <h2 class="section-title" style="color:var(--white)">Non eroghiamo corsi.<br>Costruiamo risultati.</h2>
+
+    <div class="metodo-content">
+      <div>
+        <p class="metodo-text">
+          In Nexora Academy la formazione è un <strong style="color:var(--white)">processo strategico integrato</strong> negli obiettivi aziendali. Ogni intervento nasce da un'analisi approfondita dei fabbisogni e si sviluppa attraverso un percorso strutturato, orientato a <strong style="color:var(--white)">performance misurabili</strong>.
+        </p>
+        <div class="metodo-cta">
+          <a href="#contatti" class="btn-white">Richiedi ora una consulenza gratuita →</a>
+        </div>
+      </div>
+      <div class="metodo-steps">
+        <div class="metodo-step">
+          <div class="step-num">1</div>
+          <div class="step-text">
+            <h4>Analisi dei fabbisogni</h4>
+            <p>Ascolto attivo e mappatura delle competenze esistenti e di quelle necessarie.</p>
+          </div>
+        </div>
+        <div class="metodo-step">
+          <div class="step-num">2</div>
+          <div class="step-text">
+            <h4>Progettazione su misura</h4>
+            <p>Costruiamo percorsi ad hoc, non cataloghi preconfezionati.</p>
+          </div>
+        </div>
+        <div class="metodo-step">
+          <div class="step-num">3</div>
+          <div class="step-text">
+            <h4>Erogazione e coaching</h4>
+            <p>Formatori esperti con approccio pratico, esperienziale e orientato al contesto.</p>
+          </div>
+        </div>
+        <div class="metodo-step">
+          <div class="step-num">4</div>
+          <div class="step-text">
+            <h4>Misurazione dei risultati</h4>
+            <p>KPI definiti in partenza, follow-up e report di impatto post-formazione.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VALORI -->
+<section id="valori">
+  <div class="container">
+    <div class="section-label">I nostri valori</div>
+    <h2 class="section-title">Le fondamenta su cui<br>costruiamo ogni percorso</h2>
+
+    <div class="valori-grid">
+      <div class="valore-card">
+        <div class="valore-num">1</div>
+        <div class="valore-title">Persona</div>
+        <div class="valore-desc">Ogni intervento formativo parte dalla centralità dell'individuo, delle sue potenzialità e del suo contesto.</div>
+      </div>
+      <div class="valore-card">
+        <div class="valore-num">2</div>
+        <div class="valore-title">Qualità</div>
+        <div class="valore-desc">Standard elevati nella progettazione, nella docenza e nei materiali didattici, senza compromessi.</div>
+      </div>
+      <div class="valore-card">
+        <div class="valore-num">3</div>
+        <div class="valore-title">Risultati</div>
+        <div class="valore-desc">La formazione ha senso solo se produce un cambiamento misurabile. Progettiamo per l'impatto.</div>
+      </div>
+      <div class="valore-card">
+        <div class="valore-num">4</div>
+        <div class="valore-title">Affidabilità</div>
+        <div class="valore-desc">Manteniamo gli impegni, rispettiamo le scadenze e siamo presenti in ogni fase del percorso.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PERCORSI FORMATIVI -->
+<section id="percorsi">
+  <div class="container">
+    <div class="section-label">Percorsi Formativi</div>
+    <h2 class="section-title">Scegli il percorso<br>giusto per te</h2>
+    <p class="section-desc">Otto aree tematiche complete, con programmi modulari e docenti specializzati per ogni settore.</p>
+
+    <div class="percorsi-grid">
+      <div class="percorso-card">
+        <div class="percorso-icon">🌿</div>
+        <div class="percorso-title">Ambiente e Sostenibilità</div>
+        <button class="btn-info" onclick="openModal('percorso')">Richiedi informazioni</button>
+      </div>
+      <div class="percorso-card">
+        <div class="percorso-icon">⚖️</div>
+        <div class="percorso-title">Normativa e Obbligatoria</div>
+        <button class="btn-info" onclick="openModal('percorso')">Richiedi informazioni</button>
+      </div>
+      <div class="percorso-card">
+        <div class="percorso-icon">💡</div>
+        <div class="percorso-title">Digitale e Innovazione</div>
+        <button class="btn-info" onclick="openModal('percorso')">Richiedi informazioni</button>
+      </div>
+      <div class="percorso-card">
+        <div class="percorso-icon">🎯</div>
+        <div class="percorso-title">Manageriale e Leadership</div>
+        <button class="btn-info" onclick="openModal('percorso')">Richiedi informazioni</button>
+      </div>
+      <div class="percorso-card">
+        <div class="percorso-icon">📈</div>
+        <div class="percorso-title">Commerciale e Marketing</div>
+        <button class="btn-info" onclick="openModal('percorso')">Richiedi informazioni</button>
+      </div>
+      <div class="percorso-card">
+        <div class="percorso-icon">🔧</div>
+        <div class="percorso-title">Tecnica e Operativa</div>
+        <button class="btn-info" onclick="openModal('percorso')">Richiedi informazioni</button>
+      </div>
+      <div class="percorso-card">
+        <div class="percorso-icon">🧠</div>
+        <div class="percorso-title">Soft Skills</div>
+        <button class="btn-info" onclick="openModal('percorso')">Richiedi informazioni</button>
+      </div>
+      <div class="percorso-card">
+        <div class="percorso-icon">👥</div>
+        <div class="percorso-title">Amministrazione e Risorse Umane</div>
+        <button class="btn-info" onclick="openModal('percorso')">Richiedi informazioni</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="container">
+    <div class="section-label">Domande Frequenti</div>
+    <h2 class="section-title">Hai domande?<br>Abbiamo le risposte.</h2>
+
+    <div class="faq-list">
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Come funziona la formazione finanziata? <span class="faq-arrow">▾</span>
+        </button>
+        <div class="faq-a">La formazione finanziata permette alle aziende di accedere a fondi interprofessionali (es. Fondimpresa, Fondirigenti) per coprire totalmente o parzialmente i costi formativi. Nexora Academy gestisce l'intero iter burocratico, dalla presentazione del piano formativo all'erogazione e rendicontazione, senza alcun costo aggiuntivo per te.</div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          I corsi sono erogati in presenza o online? <span class="faq-arrow">▾</span>
+        </button>
+        <div class="faq-a">Nexora Academy offre percorsi in presenza, online sincrono e in modalità blended (mista). La modalità viene definita in fase di analisi dei fabbisogni in base agli obiettivi, al numero di partecipanti e alle preferenze organizzative dell'azienda cliente.</div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Quanto dura un percorso formativo? <span class="faq-arrow">▾</span>
+        </button>
+        <div class="faq-a">La durata varia in base agli obiettivi e al livello di partenza dei partecipanti. I percorsi brevi possono durare da 8 a 24 ore, mentre i programmi strutturati arrivano a 80-120 ore. Ogni percorso è costruito su misura e modulare.</div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Rilasciate attestati o certificazioni? <span class="faq-arrow">▾</span>
+        </button>
+        <div class="faq-a">Sì. Al termine di ogni percorso formativo vengono rilasciati attestati di partecipazione e/o certificazioni riconosciute, in base al tipo di corso. Per le certificazioni informatiche e linguistiche, collaboriamo con enti certificatori accreditati a livello internazionale.</div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Posso richiedere un corso personalizzato per la mia azienda? <span class="faq-arrow">▾</span>
+        </button>
+        <div class="faq-a">Assolutamente sì. La personalizzazione è il cuore del nostro approccio. Contattaci per una consulenza gratuita: analizzeremo insieme i fabbisogni della tua organizzazione e progetteremo un percorso su misura per i tuoi obiettivi specifici.</div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Operate solo in Abruzzo o anche in altre regioni? <span class="faq-arrow">▾</span>
+        </button>
+        <div class="faq-a">Nexora Academy ha sede a Pescara ma opera su tutto il territorio nazionale. Grazie alla modalità online e alla rete di formatori partner, possiamo supportare aziende in qualsiasi regione italiana.</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CONTATTI -->
+<section id="contatti">
+  <div class="container">
+    <div class="section-label">Contatti</div>
+    <h2 class="section-title">Inizia il tuo percorso<br>con noi</h2>
+
+    <div class="contatti-grid">
+      <div class="contact-info">
+        <div class="contact-block">
+          <h4>📞 CHIAMA ORA</h4>
+          <a href="tel:+393403525480" class="cta-call">📞 340 352 5480</a>
+        </div>
+        <div class="contact-block">
+          <h4>✉️ SCRIVICI</h4>
+          <a href="mailto:info@nexoracademy.it">info@nexoracademy.it</a>
+        </div>
+        <div class="contact-block">
+          <h4>📍 SEDE LEGALE</h4>
+          <p>Via Dei Marrucini 51<br>65127 Pescara (PE)</p>
+        </div>
+        <div class="contact-block">
+          <h4>🕐 ORARI</h4>
+          <p>Lun – Ven: 9:00 – 18:00<br>Sabato: su appuntamento</p>
+        </div>
+      </div>
+
+      <div class="contact-form">
+        <h3>Richiedi consulenza formativa</h3>
+        <div class="form-row">
+          <div class="form-group">
+            <label>NOME</label>
+            <input type="text" placeholder="Mario">
+          </div>
+          <div class="form-group">
+            <label>COGNOME</label>
+            <input type="text" placeholder="Rossi">
+          </div>
+        </div>
+        <div class="form-group">
+          <label>TELEFONO</label>
+          <input type="tel" placeholder="+39 000 0000000">
+        </div>
+        <div class="form-group">
+          <label>AZIENDA / ENTE</label>
+          <input type="text" placeholder="Nome della tua azienda">
+        </div>
+        <div class="form-group">
+          <label>AREA DI INTERESSE</label>
+          <select>
+            <option value="">— Seleziona un'area —</option>
+            <option>Formazione Aziendale</option>
+            <option>Formazione Finanziata</option>
+            <option>Sviluppo Competenze</option>
+            <option>Commerciale e Marketing</option>
+            <option>Digitale e Innovazione</option>
+            <option>Leadership e Management</option>
+            <option>Soft Skills</option>
+            <option>Normativa e Obbligatoria</option>
+            <option>Ambiente e Sostenibilità</option>
+            <option>Amministrazione e Risorse Umane</option>
+            <option>Tecnica e Operativa</option>
+            <option>Certificazioni</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>BREVE MESSAGGIO</label>
+          <textarea placeholder="Descrivi brevemente le tue esigenze formative…"></textarea>
+        </div>
+        <button class="btn-submit" onclick="submitForm()">Invia richiesta →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p><strong>Nexora Academy S.r.l.</strong> — Via Dei Marrucini 51, 65127 Pescara &nbsp;|&nbsp; <a href="tel:+393403525480" style="color:rgba(255,255,255,0.6);text-decoration:none;">340 352 5480</a> &nbsp;|&nbsp; <a href="mailto:info@nexoracademy.it" style="color:rgba(255,255,255,0.6);text-decoration:none;">info@nexoracademy.it</a></p>
+  <p style="margin-top:0.5rem;font-size:0.78rem;opacity:0.5;">© 2025 Nexora Academy S.r.l. — Per chi sceglie il futuro, ora.</p>
+</footer>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModalDirect()">×</button>
+    <h3 id="modalTitle">Titolo</h3>
+    <p id="modalBody">Testo</p>
+    <a href="#contatti" class="btn-primary" onclick="closeModalDirect()" style="text-decoration:none;display:inline-flex;">Richiedi informazioni →</a>
+  </div>
+</div>
+
+<script>
+  // NAV scroll
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 30);
+  });
+
+  // Hamburger
+  function toggleMenu() {
+    document.getElementById('navLinks').classList.toggle('open');
+  }
+  document.querySelectorAll('.nav-links a').forEach(a => {
+    a.addEventListener('click', () => document.getElementById('navLinks').classList.remove('open'));
+  });
+
+  // FAQ
+  function toggleFaq(btn) {
+    const answer = btn.nextElementSibling;
+    const isOpen = answer.classList.contains('open');
+    document.querySelectorAll('.faq-a.open').forEach(a => a.classList.remove('open'));
+    document.querySelectorAll('.faq-q.open').forEach(q => q.classList.remove('open'));
+    if (!isOpen) { answer.classList.add('open'); btn.classList.add('open'); }
+  }
+
+  // Modal
+  const modals = {
+    aziendale: { title: 'Formazione Aziendale', body: 'Progettiamo percorsi formativi su misura per la tua azienda: dall\'analisi dei fabbisogni alla valutazione dell\'impatto. Lavoriamo a stretto contatto con HR e management per allineare la formazione agli obiettivi strategici dell\'organizzazione.' },
+    finanziata: { title: 'Formazione Finanziata', body: 'Accedi ai fondi interprofessionali e agli incentivi regionali e nazionali per abbattere i costi della formazione. Nexora Academy gestisce tutto l\'iter: pianificazione, presentazione, erogazione e rendicontazione.' },
+    competenze: { title: 'Sviluppo Competenze', body: 'Programmi continuativi di upskilling e reskilling per costruire team resilienti e ad alte performance. Investire nelle persone è il miglior investimento per il futuro dell\'azienda.' },
+    commerciale: { title: 'Area Commerciale e Marketing', body: 'Percorsi dedicati a sales management, tecniche di vendita consulenziale, digital marketing, CRM e comunicazione persuasiva. Per team commerciali che vogliono crescere.' },
+    digitale: { title: 'Competenze Tecniche e Digitali', body: 'Dalla cybersecurity all\'automazione, dall\'intelligenza artificiale applicata al business al project management digitale. Prepariamo i tuoi team per la trasformazione digitale.' },
+    certificazioni: { title: 'Certificazioni Informatiche e Linguistiche', body: 'Percorsi preparatori per certificazioni riconosciute a livello internazionale: Microsoft, Google, ECDL, IELTS, Cambridge e molto altro. Con formatori certificati e metodo collaudato.' },
+    leadership: { title: 'Leadership e Management', body: 'Sviluppiamo leader consapevoli, capaci di motivare team, gestire il cambiamento e prendere decisioni strategiche. Coaching, assessment e training su misura per ogni livello manageriale.' },
+    percorso: { title: 'Richiedi informazioni sul percorso', body: 'Compila il form di contatto o chiamaci direttamente per ricevere il programma dettagliato, date, costi e modalità di accesso per questo percorso formativo.' },
+  };
+
+  function openModal(key) {
+    const m = modals[key] || modals.percorso;
+    document.getElementById('modalTitle').textContent = m.title;
+    document.getElementById('modalBody').textContent = m.body;
+    document.getElementById('modalOverlay').classList.add('show');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeModal(e) {
+    if (e.target === document.getElementById('modalOverlay')) closeModalDirect();
+  }
+  function closeModalDirect() {
+    document.getElementById('modalOverlay').classList.remove('show');
+    document.body.style.overflow = '';
+  }
+
+  // Form submit
+  function submitForm() {
+    alert('✅ Grazie! La tua richiesta è stata inviata. Ti contatteremo entro 24 ore lavorative.');
+  }
+</script>
+</body>
+</html>
